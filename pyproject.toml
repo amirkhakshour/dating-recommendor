@@ -9,6 +9,7 @@ python = "^3.8"
 flask = "^1.1.2"
 flask_restful = "^0.3.8"
 bson = "^0.5.10"
+numpy = "^1.19.1"
 
 [tool.poetry.dev-dependencies]
 
