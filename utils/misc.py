@@ -1,6 +1,7 @@
 from math import sqrt
 import numpy as np
 import hashlib
+import heapq
 
 
 def vectorize(profile):
@@ -24,3 +25,19 @@ def cosine_similarity(vec_a, vec_b):
     norm_b = norm(vec_b)
     dot = sum(a * b for a, b in zip(vec_a, vec_b))
     return dot / (norm_a * norm_b)
+
+
+def k_smallest_items(capacity=10):
+    """Always yields k smallest Items."""
+    q = []
+    counter = 0
+    while True:
+        value, item = yield q
+        if value is None:
+            break
+        if len(q) < capacity:
+            heapq.heappush(q, (-value, counter, item))
+        else:
+            heapq.heappushpop(q, (-value, counter, item))
+
+        counter += 1
