@@ -1,4 +1,5 @@
 from math import sqrt
+import time
 import numpy as np
 import hashlib
 import heapq
@@ -41,3 +42,14 @@ def k_smallest_items(capacity=10):
             heapq.heappushpop(q, (-value, counter, item))
 
         counter += 1
+
+
+def debug_time(func):
+    def wrapper(*args, **kwargs):
+        beg_ts = time.time()
+        ret_val = func(*args, **kwargs)
+        end_ts = time.time()
+        print("elapsed time: %f" % (end_ts - beg_ts))
+        return ret_val
+
+    return wrapper

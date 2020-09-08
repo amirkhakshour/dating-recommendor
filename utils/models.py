@@ -2,7 +2,7 @@ import six
 from abc import ABCMeta, abstractmethod
 from functools import cached_property
 from .db import db
-from .misc import k_smallest_items, vectorize, cosine_similarity
+from .misc import k_smallest_items, vectorize, cosine_similarity, debug_time
 
 
 class Model:
@@ -25,6 +25,7 @@ class IVectorModel(six.with_metaclass(ABCMeta, Model)):
         _raw_data = {k: getattr(self, k, None) for k in self._fields}
         return vectorize(_raw_data)
 
+    @debug_time
     def k_nearest_neighbors_naive(self, capacity, method=cosine_similarity):
         """Naive implementation of K nearest neighbour functionality using cosine similarity."""
         container = k_smallest_items(capacity)
